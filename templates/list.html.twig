@@ -1,0 +1,61 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Listes des Articles{% endblock %}
+
+{% block body %}
+
+{% for message in app.flashes('edit') %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% for message in app.flashes('delete') %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% for message in app.flashes('create') %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+
+<table class="table">
+<thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Nom</th>
+      <th scope="col">Prix</th>
+      <th scope="col">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+
+{% for article in articles %}
+    <tr>
+      <th scope="row">{{loop.index}}</th>
+      <td>{{article.nom}}</td>
+      <td>{{article.prix}}</td>
+      {% if article.description|length >=50 %}
+      <td>{{article.description|slice(0,50)}}...</td>
+      {% else %}
+      <td>{{article.description}}</td>
+      {% endif %}
+      <td>
+      <a class="btn btn-success mt-auto" href="{{ path('article_detail', {id: article.id}) }}">Accéder</a>
+      </td>
+      <td>
+      <a class="btn btn-dark mt-auto" href="{{ path('article_edit', {id: article.id}) }}">Modifier</a>
+      </td>
+      <td>
+      <a class="btn btn-danger mt-auto" href="{{ path('article_delete', {id: article.id}) }}" onclick = " return confirm('Etes-vous de vouloir supprimer cet article ? ')">Supprimer</a>
+      </td>
+    </tr>
+{% endfor %}
+    <tbody>
+<table>
+
+{% endblock %}

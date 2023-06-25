@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Créer un livre{% endblock %}
+
+{% block body %}
+<div class = 'container mt-2'>
+    <h1>Ajout d'un livre</h1>
+    {# {{form(formArticle)}} #}
+    {{form_start(formArticle)}}
+<div class = 'row'>
+        <div class="col">
+        {{form_row(formArticle.nom, {'label':''})}} {# 'label' : #}
+        </div>
+        <div class="col">
+        {{form_row(formArticle.prix, {'label':''})}} {# 'label' : #}
+        </div>
+        <div class="col-12">
+        {{form_row(formArticle.description, {'label':''})}} {# 'label' : #}
+        </div>
+        <div class="col">
+        {{form_row(formArticle.imageFile)}} 
+        </div>
+    {{form_end(formArticle)}}
+
+    {# <input type="submit" class="btn btn-primary mt-3 mb-4" value="Enregistrer"> #}
+</div>
+{% endblock %}

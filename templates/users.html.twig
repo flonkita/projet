@@ -1,0 +1,55 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Listes des Users{% endblock %}
+
+{% block body %}
+
+{% for message in app.flashes('edit') %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% for message in app.flashes('delete') %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% for message in app.flashes('create') %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+
+<table class="table">
+<thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Prénom</th>
+      <th scope="col">Email</th>
+    </tr>
+  </thead>
+  <tbody>
+
+{% for user in users %}
+    <tr>
+      <th scope="row">{{user.id}}</th>
+      <td>{{user.prenom}}</td>
+      <td>{{user.email}}</td>
+      {# <td>{{user.roles}}</td> #}
+      {# {% endfor %} #}
+      {# <td>
+      <a class="btn btn-dark mt-auto" href="{{ path('user_edit', {id: user.id}) }}">Modifier</a>
+      </td> #}
+      {# <td>
+      <a class="btn btn-danger mt-auto" href="{{ path('user_delete', {id: user.id}) }}" onclick = " return confirm('Etes-vous de vouloir supprimer ce livre ? ')">Supprimer</a>
+      </td> #}
+
+    </tr>
+{% endfor %}
+    <tbody>
+<table>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Envoyez nous un message !{% endblock %}
+
+{% block body %}
+<div class = 'container mt-2'>
+    <h1>Envoyez nous un message !</h1>
+    {# {{form(formContact)}} #}
+
+    {{form_start(formContact)}}
+    <div class="row">
+        <div class="col">
+        {{form_row(formContact.sujet, {'label':'Sujet '})}} {# 'label' : #}
+        </div>
+        <div class="col">
+        {{form_row(formContact.email, {'label':'Votre email'})}} {# 'label' : #}
+        </div>
+        <div class="col-12">
+        {{form_row(formContact.message)}}
+        </div>
+    
+    {{form_end(formContact)}}
+    {# <input type="submit" class="btn btn-primary mt-3 mb-4" value="Enregistrer"> #}
+</div>
+{% endblock %}

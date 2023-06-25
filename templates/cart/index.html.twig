@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nkinel - Panier{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Votre panier</h1>
+
+    {% if items is empty %}
+    <p><b>Votre panier est vide !!</b></p>
+    {% else %}
+
+    <a href="{{ path('cart_clear') }}" onclick="return confirm('Etes-vous sure de vouloir vider tout le panier ?');" class="btn btn-warning mb-2"><i class="bi-trash-fill me-1"></i> Vider le panier</a>
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col"></th>
+                <th scope="col">Produit</th>
+                {# <th scope="col">Catégorie</th> #}
+                <th scope="col">Prix (en €)</th>
+                <th scope="col">Quantité</th>
+                <th scope="col">Total</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <th scope="row">{{ item.product.id }}</th>
+                <td>
+                <img src="{{ asset ('/img/articles/' ~ item.product.imageName)}}" alt="" style="width: 50px; height: 50px; object-fit: contain">
+                
+            </td>
+                <td>{{ item.product.nom }}</td>
+                {# <td></td> #}
+                <td>{{ item.product.prix }} €</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.product.prix * item.quantity }} €</td>
+                <td>
+                    <a class="btn btn-danger flex-shrink-0" onclick="return confirm('Suppimer cet élément du panier ?');" href="{{ path('cart_delete', {id: item.product.id}) }}">
+                        <i class="bi-trash-fill me-1"></i>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4">TOTAL</td>
+                <td>{{ totalQuantity }}</td>
+                <td>{{ total }} €</td>
+                <td>
+                    <form action="/checkout" method="POST">
+                        <button type="submit" class="btn btn-primary">PAYER ({{ total }} €)</button>
+                    </form>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+
+    {% endif %}
+</div>
+{% endblock %}

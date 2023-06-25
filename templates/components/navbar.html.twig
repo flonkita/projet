@@ -1,0 +1,47 @@
+   
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container px-4 px-lg-5">
+                 <a class="navbar-brand" href="{{ path('home') }}">
+      <img src="{{ asset('img/logo.png') }}" alt="logo nkinel" class="d-none d-lg-inline-block" width="50px">
+      <span class="d-lg-none">Nkinel</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ path('home') }}">Home</a></li>
+                        {# <li class="nav-item"><a class="nav-link" href="{{ path ('article_new')}}">Create an Article</a></li> #}
+                        <li class="nav-item"><a class="nav-link" href="{{path ('contact')}}">Contact</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{{ path ('article_list')}}">All Products</a></li>
+                                <li><a class="dropdown-item" href="{{ path ('article_new')}}">Create an Article</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">User</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                {% if app.user %}
+                                <li><a class="dropdown-item" href="{{ path ('app_logout')}}">Déconnexion</a></li>
+                                <li><a class="dropdown-item" href="{{ path ('user_list')}}">Voir tous les Users</a></li>
+                                {# <li><a class="dropdown-item" href="{{path ('user_list')}}">All Users</a></li> #}
+                                {% else %}
+                                <li><a class="dropdown-item" href="{{ path ('app_register')}}"><i class="bi-person-plus me-1"></i>Register</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="{{ path ('app_login')}}">Sign in</a></li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <a class="btn btn-outline-dark" type="submit" href="{{ path ('app_cart')}}">
+                            <i class="bi-cart-fill me-1"></i>
+                            Cart
+                            <span class="badge bg-dark text-white ms-1 rounded-pill">{{app.session.get('panier') ? app.session.get('panier')| length :'0'}}</span>
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </nav>
